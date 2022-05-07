@@ -8,10 +8,12 @@ public class period {
     public int minute = 0;
     public int endinghour = 0;
     public int endingminute = 0;
+    public String hunArticle ="";
 
-    public period(int startinghour, int startingminute){
+    public period(int startinghour, int startingminute, String article){
         hour = startinghour;
         minute = startingminute;
+        hunArticle = article;
 
         if (minute + 45 >= 60){
             int leftover = minute + 45 - 60;
@@ -33,6 +35,10 @@ public class period {
     public LocalDateTime getendingldt(){
         LocalDateTime now = LocalDateTime.now();
         return LocalDateTime.of(now.getYear(),now.getMonth(),now.getDayOfMonth(),endinghour,endingminute);
+    }
+
+    public String getHunArticle(){
+        return hunArticle;
     }
 
 }

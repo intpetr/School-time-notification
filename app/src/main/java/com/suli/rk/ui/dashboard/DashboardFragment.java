@@ -94,7 +94,9 @@ public class DashboardFragment extends Fragment {
                     editor.putInt(daynumber+"h",hour);
                     editor.putInt(daynumber+"m",minute);
                     editor.commit();
+                    Toast.makeText(getContext(), "Saved", Toast.LENGTH_LONG).show();
                     System.out.println("Saved "+hour+" and "+minute+" for day "+daynumber);
+                    textView.setText("Your saved ending times are: \n"+ getEndingTimesString());
 
 
 

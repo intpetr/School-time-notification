@@ -27,9 +27,9 @@ import java.time.LocalDateTime;
 public class OrakHatterfolyamat extends Service {
     NotificationManager mNotificationManager;
 
-    period[ ] lessons = {new period(8,0), new period(9,0),
-            new period(9,55), new period(10,50), new period(11,45), new period(12,55),
-    new period(13,50), new period(14,40), new period(15,30)};
+    period[ ] lessons = {new period(8,0, "az"), new period(9,0,"a"),
+            new period(9,55,"a"), new period(10,50,"a"), new period(11,45,"az"), new period(12,55,"a"),
+    new period(13,50,"a"), new period(14,40,"a"), new period(15,30,"a")};
     int[] daysend = {};
 
     int[] endTimesHour = {20,20,20,20,20};
@@ -162,7 +162,7 @@ public class OrakHatterfolyamat extends Service {
 
     private boolean isInSchool(){
         LocalDateTime now = LocalDateTime.now();
-        if(now.getDayOfWeek().getValue() >= 5 || now.getHour() > endTimesHour[now.getDayOfWeek().getValue()] || now.getHour()<8){
+        if(now.getDayOfWeek().getValue() <= 5 || now.getHour() > endTimesHour[now.getDayOfWeek().getValue()] || now.getHour()<8){
             return false;
         }
         else{
@@ -199,8 +199,8 @@ public class OrakHatterfolyamat extends Service {
                 int hour = sharedPreferences.getInt(i+"h",-1);
                 int minute = sharedPreferences.getInt(i+"m", -1);
                 if(hour != -1 && minute != -1){
-                    endTimesHour[i] = hour;
-                    endTimesMinute[i] = minute;
+                    endTimesHour[i-1] = hour;
+                    endTimesMinute[i-1] = minute;
                     System.out.println("LOADED"+hour+" "+minute+" for day "+i);
                 }
                 else{
