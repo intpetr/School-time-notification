@@ -109,13 +109,14 @@ public class OrakHatterfolyamat extends Service {
 
     @Override
     public void onCreate() {
-        //Toast.makeText(this, "Service created!", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Az órák háttérfolyamat elindult.", Toast.LENGTH_LONG).show();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_ON);
         myreceiver = new screenreceiver();
         registerReceiver(myreceiver, filter);
         loadEndTimes();
         System.out.println("The background service started.");
+
 
 
 

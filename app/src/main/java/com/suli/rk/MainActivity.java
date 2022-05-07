@@ -1,9 +1,12 @@
 package com.suli.rk;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Service stopped", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Háttérfolyamat leállítva", Toast.LENGTH_LONG).show();
                 stopService(serviceIntent);
             }
         });
@@ -57,7 +60,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        TextView statusText = (TextView) findViewById(R.id.textView);
 
+        if(isMyServiceRunning(OrakHatterfolyamat.class)){
+            statusText.setText("Háttérfolyamat bekapcsolva");
+        }
+        else{
+            statusText.setText("Háttérfolyamat kikapcsolva");
+        }
+
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
