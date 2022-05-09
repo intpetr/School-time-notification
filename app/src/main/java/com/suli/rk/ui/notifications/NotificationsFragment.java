@@ -26,6 +26,8 @@ public class NotificationsFragment extends Fragment {
 
          TextView textView = binding.textNotifications;
          textView.setText("In the making by: Peti");
+
+
         return root;
     }
 

@@ -40,34 +40,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        Intent serviceIntent = new Intent(this,OrakHatterfolyamat.class);
-        //startService(serviceIntent);
 
-        Button stop = (Button) findViewById(R.id.button);
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Háttérfolyamat leállítva", Toast.LENGTH_LONG).show();
-                stopService(serviceIntent);
-            }
-        });
-
-        Button start = (Button) findViewById(R.id.button2);
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startService(serviceIntent);
-            }
-        });
-
-        TextView statusText = (TextView) findViewById(R.id.textView);
-
-        if(isMyServiceRunning(OrakHatterfolyamat.class)){
-            statusText.setText("Háttérfolyamat bekapcsolva");
-        }
-        else{
-            statusText.setText("Háttérfolyamat kikapcsolva");
-        }
 
     }
 

@@ -109,7 +109,7 @@ public class OrakHatterfolyamat extends Service {
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, "Az órák háttérfolyamat elindult.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Service started", Toast.LENGTH_LONG).show();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_ON);
         myreceiver = new screenreceiver();
@@ -163,7 +163,7 @@ public class OrakHatterfolyamat extends Service {
 
     private boolean isInSchool(){
         LocalDateTime now = LocalDateTime.now();
-        if(now.getDayOfWeek().getValue() <= 5 || now.getHour() > endTimesHour[now.getDayOfWeek().getValue()] || now.getHour()<8){
+        if(now.getDayOfWeek().getValue() >5 || now.getHour() > endTimesHour[now.getDayOfWeek().getValue()] || now.getHour()<8){
             return false;
         }
         else{
@@ -178,14 +178,14 @@ public class OrakHatterfolyamat extends Service {
             if(lessons[i].getstartldt().isAfter(now)){
                 Duration difference = Duration.between(now,lessons[i].getstartldt());
                 int periodNumber = i +1;
-                return difference.toMinutes() +" Perc van hátra a " +periodNumber+". óráig.";
-                //szamold ki amit akarsz mutatni mert megvan ami kell oran vagy
+                return difference.toMinutes() +" Perc van hátra"+lessons[i].getHunArticle()+" " +periodNumber+". óráig";
+
             }
             else if (lessons[i].getendingldt().isAfter(now)){
                 Duration difference = Duration.between(now,lessons[i].getendingldt());
                 int periodNumber = i +1;
-                return difference.toMinutes() + " Perc van hátra "+periodNumber+". órából.";
-                //szamold ki amit akarsz mutatni mert megvan ami kell szünet van
+                return difference.toMinutes() +" Perc van hátra"+lessons[i].getHunArticle()+" " +periodNumber+". órából";
+
             }
         }
         return "Vége az óráidnak";
